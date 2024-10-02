@@ -4,6 +4,8 @@
 npm run dev
 ```
 
+open url http://localhost:5173/
+
 # Vending machine
 
 - 입력
