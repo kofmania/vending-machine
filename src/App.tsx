@@ -3,10 +3,12 @@ import InputCard from "./components/InputCard";
 import InputCash from "./components/InputCash";
 import { useMachine, products } from "./components/useMachine";
 import Output from "./components/Output";
+import { useState } from "react";
 
 const cashType = [100, 500, 1000, 5000, 10000];
+
 function App() {
-  const machine = useMachine({});
+  const machine = useMachine();
 
   return (
     <div>
@@ -52,12 +54,35 @@ function App() {
             );
           })}
         </div>
+        <div>
+          <h2>Reset</h2>
+          <button onClick={() => machine.reset(true, 0)}>reset</button>
+        </div>
         <div className="h-1 bg-slate-400"></div>
-        <h1>Card {machine.card ? "Yes" : "No"}</h1>
-        <h1>Cash {machine.cash}</h1>
-        <h1>Selected item {machine.selected}</h1>
+        <div className="flex justify-center">
+          <div className="grid max-w-md grid-cols-2 grid-rows-3">
+            <h1 className="text-lg font-bold">Card</h1>
+            <h1 className="text-lg font-bold">{machine.card ? "Yes" : "No"}</h1>
+            <h1 className="text-lg font-bold">Cash </h1>
+            <h1 className="text-lg font-bold">{machine.cash}</h1>
+            <h1 className="text-lg font-bold">Selected item</h1>
+            <h1 className="text-lg font-bold">
+              {machine.selected === undefined
+                ? "-"
+                : products[machine.selected].name}
+            </h1>
+          </div>
+        </div>
         <div className="h-1 bg-slate-400"></div>
-        <Output />
+        <div className="flex flex-col items-center">
+          <h1>Output</h1>
+          <div className="grid max-w-md grid-cols-2 grid-rows-3">
+            <h1 className="text-lg font-bold">Item</h1>
+            <h1 className="text-lg font-bold">{machine.result}</h1>
+            <h1 className="text-lg font-bold">Cash return</h1>
+            <h1 className="text-lg font-bold">{machine.returns}</h1>
+          </div>
+        </div>
       </div>
     </div>
   );
