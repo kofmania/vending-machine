@@ -1,10 +1,5 @@
 import "./App.css";
-import InputCard from "./components/InputCard";
-import InputCash from "./components/InputCash";
 import { useMachine, products } from "./components/useMachine";
-import Output from "./components/Output";
-import { useState } from "react";
-
 const cashType = [100, 500, 1000, 5000, 10000];
 
 function App() {
@@ -12,7 +7,7 @@ function App() {
 
   return (
     <div>
-      <h1 className="mb-10">Vending machine</h1>
+      <h1 className="mb-10 text-4xl">Vending machine</h1>
       <div>
         <div>
           <h2>Cash</h2>

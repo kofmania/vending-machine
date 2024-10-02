@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 type Product = { name: string; price: number; count: number };
 const products: Array<Product> = [
