@@ -1,50 +1,30 @@
-# React + TypeScript + Vite
+# Vending machine
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- 입력
+  - 제품
+    - n가지중 1가지만 선택 가능
+    - 제품 수량이 1 이상인 제품만 선택 가능
+    - 처음에는 아무것도 선택된 상태가 아님
+    - 마지막 선택한 제품이 선택된 상태가 됨
+  - 지불
+    - 현금 또는 카드
+    - 선택 상품 금액보다 큰 현금 또는 카드 를 유효한 지불로 판단
+    - 2가지 입력시 현금 차감 후 추가 금액 카드 승인
+- 동작
+  - 취소
+    - 지불로 넣은 현금을 반환
+      - 잔액 반환 메시지
+    - 카드는 아무 동작 없음
+    - 제품 선택 초기화
+  - 판매
+    - 제품과 제품 가격이상의 현금 또는 카드 입력 만족시 판매 실행
+    - 현금은 제품 가격만큼 감소, 카드는 승인 요청
+    - 먼저 현금에서 제품 가격만큼 차감, 이후 모자라는 금액은 카드 승인
+      - 카드 승인 요청 실패시 차감 금액 복원
+        - 거래 실패 메시지
+    - 거래 성공
+      - 잔액 현금 배출
+        - 잔액 반환 메시지
+      - 판매 제품 수량 1 감소
+        - 제품 배출 메시지
+      - 거래 성공 메시지
