@@ -1,3 +1,9 @@
+# run
+
+```
+npm run dev
+```
+
 # Vending machine
 
 - 입력
